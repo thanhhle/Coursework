@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 29 00:15:30 2016
+
+@author: admin
+"""
+import random
+
+### Question 1
+
+print("--------------- QUESTION 1 ---------------")
+tryAgain = 'y'
+
+while (tryAgain == 'y' or tryAgain == "Y"):
+    secretNum = random.randint(0, 99)
+    
+    def main():
+        numGuess = guessNum()
+        checkNum(numGuess)
+    
+    def guessNum():
+        num = int(input("Enter a number between 0 and 99: "))
+        while(num<0 or num>99):
+            num = int(input("Enter again: "))
+        return num
+    
+    def checkNum(num):
+        if(num == secretNum):
+            print("Great guess")
+        elif(num%10*10+num//10 == secretNum):
+            print("Right Digits, Wrong Order.")
+        elif(num%10==secretNum%10 or num%10==secretNum//10 or num//10==secretNum%10 or num//10==secretNum//10):
+            print("Not Bad, One Digit OK.")
+        else:
+            print("Completely Wrong")
+    
+    main()
+    print("The random number:", secretNum)
+    tryAgain = input("Do You Want to Try Again?--Answer 'Y' or 'y' for Yes, or Anything Else for No ")
+
+
+### Question 2
+print("--------------- QUESTION 2 ---------------")
+done = 'y'
+bank = 20
+while(done == 'y' or done == 'Y'): 
+    def main():
+        result = playGame()
+        bank = calculateBanking(result)
+        print("Your bank: $", bank)
+    
+    
+    def playGame():
+        dice1 = random.randint(0, 6)
+        print("Your first dice:", dice1)
+    
+        dice2 = random.randint(0, 6)
+        print("Your second dice:", dice2)
+        
+        diceSum = dice1 + dice2
+        print("Sum of your 2 dices:", diceSum)
+        
+        print("")
+    
+        if(diceSum == 2 or diceSum == 3 or diceSum == 12):
+            print("You lose!")
+            return "lose"
+        elif(diceSum == 7 or diceSum == 1):
+            print("You win")
+            return "win"
+        else:
+            print("You have to roll again")
+            dice3 = random.randint(0, 6)
+            dice4 = random.randint(0, 6)
+            diceSum1 = dice3 + dice4
+            print("The sum of your 2 dice:", diceSum1)
+            print("")
+        
+            while(diceSum1 != 7 and diceSum1 != diceSum):
+                print("You roll again")
+                dice3 = random.randint(0, 6)
+                dice4 = random.randint(0, 6)
+                diceSum1 = dice3 + dice4
+                print("The sum of your 2 dices:", diceSum1)
+                print("")
+            
+            if(diceSum1 == 7):
+                print("You lose!")
+                return "lose"
+            else:
+                print("Finally, you win!")
+                return "win"
+
+    def calculateBanking(result):
+        if(result == "win"):
+            global bank 
+            bank = bank + 2
+        else:
+            global bank 
+            bank = bank - 2
+        return bank
+        
+    main()
+    done = input("Do you want to continue? -- Enter 'Y' or 'y' to continue and anything else for end the game ")
