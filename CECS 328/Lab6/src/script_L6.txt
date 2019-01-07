@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class script_L6
+{
+	public static void main(String[] args)
+	{
+		Scanner input = new Scanner(System.in);
+		BST tree = new BST();
+		
+		int k = 10;
+		for(int i = 0; i < k; i++)
+		{
+			tree.insert((int)(Math.random()*100));
+		}
+		
+		System.out.print("BST: ");
+		tree.tree_walk();
+
+		System.out.println("\n\nPick a random node");
+		System.out.println("Successor: " + tree.find_successor(input.nextInt()));
+	}
+
+}
